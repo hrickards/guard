@@ -50,9 +50,9 @@ module Guard
     end
 
     def self.notify_linux(title, message, image, options)
-      require "libnotify_gnome3"
+      require_libnotify_gnome3
       default_options = { :body => message, :summary => title, :icon_path => image_path(image) }
-      Libnotify_gnome3.show default_options.merge(options) if enabled?
+      Libnotify_gnome3::Notification.show default_options.merge(options) if enabled?
     end
 
     def self.notify_windows(title, message, image, options)
@@ -96,11 +96,11 @@ module Guard
       UI.info "Please install growl gem for Mac OS X notification support and add it to your Gemfile"
     end
 
-    def self.require_libnotify
-      require 'libnotify'
+    def self.require_libnotify_gnome3
+      require 'libnotify_gnome3'
     rescue LoadError
       turn_off
-      UI.info "Please install libnotify gem for Linux notification support and add it to your Gemfile"
+      UI.info "Please install libnotify_gnome3 gem for Linux notification support and add it to your Gemfile"
     end
 
     def self.require_rbnotifu
