@@ -50,9 +50,9 @@ module Guard
     end
 
     def self.notify_linux(title, message, image, options)
-      require_libnotify # need for guard-rspec formatter that is called out of guard scope
+      require "libnotify_gnome3"
       default_options = { :body => message, :summary => title, :icon_path => image_path(image) }
-      Libnotify.show default_options.merge(options) if enabled?
+      Libnotify_gnome3.show default_options.merge(options) if enabled?
     end
 
     def self.notify_windows(title, message, image, options)
